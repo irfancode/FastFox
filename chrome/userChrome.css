@@ -1,0 +1,254 @@
+/* ==========================================================================
+   FastFox — macOS Minimal UI
+   Firefox 120+ | No layout restructuring | System-respecting
+   ==========================================================================
+   Design: Apple design language applied to native Firefox chrome.
+   No flexbox reordering, no fixed positioning, no layout hacks.
+   Everything keeps its native position — just styled cleanly.
+   ========================================================================== */
+
+:root {
+  --uc-radius: 6px;
+  --uc-radius-lg: 10px;
+}
+
+/* ── System font everywhere ── */
+* { font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif !important; }
+
+/* ==========================================================================
+   1. TAB STRIP — Clean horizontal tabs
+   ========================================================================== */
+
+/* Styled but keep native horizontal layout */
+.tabbrowser-tab {
+  border-radius: var(--uc-radius) !important;
+  margin: 2px 0 !important;
+  padding: 0 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  transition: background 0.12s ease !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.tabbrowser-tab:hover {
+  background: rgba(128,128,128,0.12) !important;
+}
+
+.tabbrowser-tab[selected] {
+  background: rgba(128,128,128,0.08) !important;
+  box-shadow: inset 0 -2px 0 -0.5px -moz-accent-color !important;
+}
+
+/* ── Active tab underline accent ── */
+.tabbrowser-tab[selected] .tab-content::after {
+  display: none !important;
+}
+
+/* ==========================================================================
+   2. NAVIGATION BAR — Minimal
+   ========================================================================== */
+
+#nav-bar {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px 8px !important;
+  min-height: 40px !important;
+}
+
+/* ── URL bar ── */
+#urlbar {
+  border-radius: var(--uc-radius-lg) !important;
+  background: rgba(128,128,128,0.08) !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 30px !important;
+  font-size: 13px !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease !important;
+  margin: 0 4px !important;
+}
+
+#urlbar[focused="true"] {
+  background: -moz-windowglass-background !important;
+  box-shadow: 0 0 0 2px -moz-accent-color !important;
+}
+
+/* ── Hide clutter ── */
+#forward-button,
+#home-button,
+#library-button,
+#downloads-button,
+#sidebar-button,
+#fxa-toolbar-menu-button {
+  display: none !important;
+}
+
+/* Keep back, reload, stop visible and compact */
+#back-button,
+#reload-button,
+#stop-button {
+  list-style-image: none !important;
+  padding: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  border-radius: var(--uc-radius) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+#back-button:hover,
+#reload-button:hover,
+#stop-button:hover {
+  background: rgba(128,128,128,0.12) !important;
+}
+
+/* ── Page action buttons ── */
+#page-action-buttons > :not(#star-button-box) {
+  opacity: 0.45 !important;
+  transition: opacity 0.12s ease !important;
+}
+#page-action-buttons > :not(#star-button-box):hover {
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   3. BOOKMARKS TOOLBAR — Clean
+   ========================================================================== */
+
+#PersonalToolbar {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 8px !important;
+  min-height: 0 !important;
+  font-size: 12px !important;
+  background: transparent !important;
+}
+
+#PlacesToolbarItems .bookmark-item {
+  padding: 2px 6px !important;
+  border-radius: var(--uc-radius) !important;
+}
+
+#PlacesToolbarItems .bookmark-item:hover {
+  background: rgba(128,128,128,0.1) !important;
+}
+
+/* ==========================================================================
+   4. TITLE BAR — Keep native macOS traffic lights
+   ========================================================================== */
+
+#titlebar-buttonbox {
+  -moz-appearance: none !important;
+}
+
+.titlebar-button {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  min-width: unset !important;
+  min-height: unset !important;
+}
+
+/* ==========================================================================
+   5. SIDEBAR — For Sidebery / Tree Style Tab
+   ========================================================================== */
+
+#sidebar-box {
+  --uc-sidebar-width: 280px;
+  border: none !important;
+  background: -moz-windowglass-background !important;
+}
+
+#sidebar-header {
+  border: none !important;
+  padding: 2px 8px !important;
+  font-size: 12px !important;
+}
+
+/* ==========================================================================
+   6. POPUPS & PANELS
+   ========================================================================== */
+
+panel,
+menupopup,
+#urlbar-results,
+#urlbar-view {
+  border-radius: var(--uc-radius-lg) !important;
+  border: none !important;
+  box-shadow: 0 0 0 0.5px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.12) !important;
+  background: -moz-windowglass-background !important;
+  backdrop-filter: blur(40px) !important;
+  padding: 4px !important;
+}
+
+.urlbarView-row {
+  border-radius: var(--uc-radius) !important;
+  padding: 6px 10px !important;
+  transition: background 0.1s ease !important;
+}
+
+.urlbarView-row:hover {
+  background: rgba(128,128,128,0.08) !important;
+}
+
+.urlbarView-row[selected] {
+  background: rgba(128,128,128,0.12) !important;
+}
+
+/* ==========================================================================
+   7. REMOVE NOISE
+   ========================================================================== */
+
+#navigator-toolbox::after,
+toolbarseparator,
+toolbarspring,
+toolbarspacer {
+  display: none !important;
+}
+
+#statuspanel {
+  display: none !important;
+}
+
+/* ==========================================================================
+   8. SCROLLBARS
+   ========================================================================== */
+
+:root {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(128,128,128,0.3) transparent !important;
+}
+
+/* ==========================================================================
+   VERTICAL TABS MODE (OPTIONAL)
+   ── To use vertical tabs, install Sidebery or Tree Style Tab ──
+   Then uncomment the block below to hide the native tab strip.
+   ========================================================================== */
+
+/*
+ * ── HIDE NATIVE TAB STRIP (for vertical tabs extensions) ──
+ * 1. Install Sidebery (recommended) or Tree Style Tab
+ * 2. Open Sidebery settings → Set "Layout" to "Vertical"
+ * 3. Uncomment below:
+ */
+
+/*
+#TabsToolbar {
+  visibility: collapse !important;
+}
+
+#titlebar {
+  -moz-appearance: none !important;
+  margin-bottom: 0 !important;
+}
+
+#sidebar-box {
+  min-width: 260px !important;
+}
+*/
+
+/* ==========================================================================
+   END — FastFox macOS Minimal UI
+   ========================================================================== */
